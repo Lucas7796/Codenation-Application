@@ -17,15 +17,24 @@ class App extends Component {
     };
   }
 
-  componentWillMount(){
-    // recipes.then((values) => {
-    //     const links = values.map(value => value.get("link"))
-    //     this.setState({list: links})
-    //     imgProps.list = this.state.list
-    //     }
-    // )
-    //const teste = JSON.parse(recipes)
-    console.log(recipes)
+componentWillMount(){
+  recipes.results.map( imagem => {
+    imgProps.img = imagem.thumbnail;
+    return(
+      console.log(imgProps.img)
+    )
+  })
+  }
+
+  renderRecipes(){
+
+    return recipes.results.map( imagem => {
+      imgProps.img = imagem.thumbnail;
+      return(
+        <RecipeItem {...imgProps}/>
+
+      )
+    })
   }
 
   render() { 
@@ -34,10 +43,11 @@ class App extends Component {
         <Navbar />
         <div className="container mt-10">
           <div className="row">
+            {/* <RecipeItem />
             <RecipeItem />
             <RecipeItem />
-            <RecipeItem />
-            <RecipeItem />
+            <RecipeItem /> */}
+            {this.renderRecipes()}
           </div>
         </div>
       </div>
