@@ -3,8 +3,11 @@ import Navbar from './Navbar'
 import RecipeItem from './RecipeItem'
 import recipes from '../sample_data/recipes.json'
 
-const imgProps = {
-  img: []
+const recipeProps = {
+  img: [],
+  title: [],
+  ingredients: [],
+  link: []
 }
 
 class App extends Component {
@@ -17,21 +20,24 @@ class App extends Component {
     };
   }
 
-componentWillMount(){
-  recipes.results.map( imagem => {
-    imgProps.img = imagem.thumbnail;
-    return(
-      console.log(imgProps.img)
-    )
-  })
-  }
+// componentWillMount(){
+//   recipes.results.map( imagem => {
+//     recipeProps.img = imagem.thumbnail;
+//     return(
+//       console.log(recipeProps.img)
+//     )
+//   })
+//   }
 
   renderRecipes(){
 
-    return recipes.results.map( imagem => {
-      imgProps.img = imagem.thumbnail;
+    return recipes.results.map( recipe => {
+      recipeProps.img = recipe.thumbnail;
+      recipeProps.title = recipe.title;
+      recipeProps.ingredients = recipe.ingredients;
+      recipeProps.link = recipe.href;
       return(
-        <RecipeItem {...imgProps}/>
+        <RecipeItem {...recipeProps}/>
 
       )
     })
@@ -43,10 +49,6 @@ componentWillMount(){
         <Navbar />
         <div className="container mt-10">
           <div className="row">
-            {/* <RecipeItem />
-            <RecipeItem />
-            <RecipeItem />
-            <RecipeItem /> */}
             {this.renderRecipes()}
           </div>
         </div>
