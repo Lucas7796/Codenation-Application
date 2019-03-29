@@ -10,6 +10,18 @@ const recipeProps = {
   link: []
 }
 
+const valor = {
+  value: ''
+}
+
+function findMatches(wordToMatch, recipes) {
+  return recipes.filter(recipe => {
+    // here we need to figure out if the city or state matches what was searched
+    const regex = new RegExp(wordToMatch, 'gi');
+    return recipe.title.match(regex) || recipe.ingredients.match(regex)
+  });
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,14 +32,12 @@ class App extends Component {
     };
   }
 
-// componentWillMount(){
-//   recipes.results.map( imagem => {
-//     recipeProps.img = imagem.thumbnail;
-//     return(
-//       console.log(recipeProps.img)
-//     )
-//   })
-//   }
+  componentWillMount(){
+    this.searchString = 'als';
+    console.log(this.searchString)
+    //valor.value = 'amem'
+    
+  }
 
   renderRecipes(){
 
@@ -46,7 +56,7 @@ class App extends Component {
   render() { 
     return (
       <div className="App">
-        <Navbar />
+        <Navbar {...this.state}/>
         <div className="container mt-10">
           <div className="row">
             {this.renderRecipes()}
