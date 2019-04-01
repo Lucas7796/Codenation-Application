@@ -9,10 +9,10 @@ const Navbar = (props) => (
 
         <div className="form-group justify-content-center row col-10 my-2">
             <input
-                value={props.searchString}
-                onChange={(e) => {}}
+                // value={props.searchString}
+                onChange={props.handleChange}
                 className="form-control col-9 mr-2"
-                type="search"
+                type="text"
                 placeholder="Search"
                 aria-label="Search"
             />

@@ -10,44 +10,41 @@ const recipeProps = {
   link: []
 }
 
-const valor = {
-  value: ''
-}
-
-function findMatches(wordToMatch, recipes) {
-  return recipes.filter(recipe => {
-    // here we need to figure out if the city or state matches what was searched
-    const regex = new RegExp(wordToMatch, 'gi');
-    return recipe.title.match(regex) || recipe.ingredients.match(regex)
-  });
-}
-
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.recipes = recipes.results;
     this.state = {
-      searchString: ''
+      searchString: ""
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount(){
-    this.searchString = 'als';
-    console.log(this.searchString)
-    //valor.value = 'amem'
-    
+
+  findMatches(searchString, recipes) {
+    const teste = recipes.results.filter(recipe => {
+      const regex = new RegExp(searchString, 'g');
+      return recipe.title.match(regex) || recipe.ingredients.match(regex)
+    });
+    return teste;
+  }
+  
+  handleChange(event) {
+    this.setState({searchString: event.target.value});
   }
 
   renderRecipes(){
-
-    return recipes.results.map( recipe => {
+    let i = 0;
+    return this.findMatches(this.state.searchString, recipes).map( recipe => {
+      
       recipeProps.img = recipe.thumbnail;
       recipeProps.title = recipe.title;
       recipeProps.ingredients = recipe.ingredients;
       recipeProps.link = recipe.href;
+      i += 1;
       return(
-        <RecipeItem {...recipeProps}/>
+        <RecipeItem key={i} {...recipeProps}/>
 
       )
     })
@@ -56,7 +53,7 @@ class App extends Component {
   render() { 
     return (
       <div className="App">
-        <Navbar {...this.state}/>
+        <Navbar handleChange={this.handleChange} {...this.state}/>
         <div className="container mt-10">
           <div className="row">
             {this.renderRecipes()}
