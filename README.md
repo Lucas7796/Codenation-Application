@@ -23,6 +23,10 @@ Você precisará do Nodejs instalado em sua máquina.
 ### Exemplo
 ![](https://s3-us-west-1.amazonaws.com/codenation-challenges/react-0/BouncyAfraidDikkops-size_restricted.gif)
 
+### BackEnd
+
+Os dados são consumidos a partir do arquivo recipes.json dentro da pasta sample_data.
+
 ## Rodando a aplicação
 Na primeira execução rodar o comando:
 ```
